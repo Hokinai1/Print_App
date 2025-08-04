@@ -136,6 +136,7 @@ $currentPage = 'clients';
     .export-wrapper{
       display: flex;
       justify-content: space-between;
+      gap:5px;
     }
     #exportType{
     background-color: #a3f3dfff;
@@ -216,11 +217,8 @@ gap: 10px;
       border-radius: 5px;
     }
 
-    .head{
-      display: flex;
-      justify-content: space-between;
-    }
-    /* Récupère le style de ton popup */
+    
+ 
 
 
   </style>
@@ -233,9 +231,7 @@ gap: 10px;
   <!-- Main -->
   <main class="main">
 <h1><?= $titre ?> </h1>
-  <!-- <p class="total">Total de clients : <span id="totalClients"><?= count($clients) ?></span></p> -->
- 
-    
+
 
     <?php if ($message): ?>
       <div class="<?= $type === 'success' ? 'alert-success' : 'alert-error' ?>" style="margin-bottom:10px; padding:10px; border-radius:5px; background:<?= $type === 'success' ? '#d4edda' : '#f8d7da' ?>; color:<?= $type === 'success' ? '#155724' : '#721c24' ?>">
@@ -258,6 +254,7 @@ gap: 10px;
         <option value="pdf">📄 PDF</option>
         <option value="excel">📊 Excel</option>
       </select>
+    
       <button id="export" onclick="exportCategories()">Exporter</button>
     </div>
     <?php else: ?>
@@ -266,14 +263,7 @@ gap: 10px;
 
     </div>
 
-    <!-- <div class="actions">
-      <form method="GET" style="display:flex; gap:10px; margin:0;">
-        <input type="text" name="search" id="searchInput" placeholder="🔍 Rechercher un client..." value="<?= htmlspecialchars($search) ?>">
-        <button type="submit">Rechercher</button>
-      </form>
-      <button onclick="openForm()">+ Nouveau client</button>
-    </div> -->
-
+  
     <div class="table-section">
       <table id="clientsTable">
         <thead>
@@ -333,7 +323,7 @@ gap: 10px;
 
     <label for="clientType">Type</label>
     <select name="clientType" id="clientType" required>
-      <option value="">........Sélectionner..........</option>
+      <option value="">Sélectionner un type.......</option>
       <option value="Particulier" <?= ($clientToEdit && $clientToEdit['type'] === 'Particulier') ? 'selected' : '' ?>>Particulier</option>
       <option value="Entreprise" <?= ($clientToEdit && $clientToEdit['type'] === 'Entreprise') ? 'selected' : '' ?>>Entreprise</option>
       <option value="Entreprise" <?= ($clientToEdit && $clientToEdit['type'] === 'ONG') ? 'selected' : '' ?>>ONG</option>
