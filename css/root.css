@@ -1,0 +1,24 @@
+:root {
+    --color-text: hsl(202, 55%, 16%);
+    --color-yellow: #f78c1f;
+    --yellow-background: #fef3e2;
+    --blue-background: hsl(202, 86%, 94%);
+    --blue-text-title: hsl(203, 41%, 72%);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'PlusJakartaSans-Bold';
+    src: url(../assets/fonts/static/PlusJakartaSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'PlusJakartaSans-Medium';
+    src: url(../assets/fonts/static/PlusJakartaSans-Medium.ttf);
+}
