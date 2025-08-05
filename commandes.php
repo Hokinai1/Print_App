@@ -252,6 +252,9 @@ gap: 10px;
 label{
    color: #023544;
 }
+.table-commandes{
+  min-width: 1000px;
+}
 
     /* Récupère le style de ton popup */
 

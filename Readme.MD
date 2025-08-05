@@ -12,14 +12,3 @@
 
 
 
-
-<div class="image-panel">
-        <!-- <p>.</p> -->
-         <h1 class="title">Ricchi House</h1>
-      <img src="./assets/images/printer.png" alt="Impression">
-      <div class="text">
-        <p>L'invention de l'imprimerie est le plus grand événement de l'histoire, c'est la révolution mère. C'est le mode d'expression de l'humanité qui se renouvelle totalement.</p>
-        <!-- <p>L'invention de l'imprimerie est le plus grand évènement de l'histoire.</p>
-        <p>Ce qui a répandu le plus de lumière dans le monde, c'est une couleur noire: l'encre d'imprimerie.</p> -->
-      </div>
-    </div>
