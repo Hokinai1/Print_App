@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'ajout
         $stmt = $pdo->prepare("INSERT INTO categories (nom, description, mesure, prix_unitaire) VALUES (?, ?, ?, ?)");
         $success = $stmt->execute([$nom, $description, $mesure, $prix]);
         $message = $success ? "success" : "error";
+        header("Location: categories.php");
         
     } else {
         $message = "empty";
@@ -246,7 +247,7 @@ if (isset($_GET['id'])) {
         <tr>
           <th>#</th>
           <th>Nom</th>
-          <th>Description</th>
+          <!-- <th>Description</th> -->
           <th>Unité</th>
           <th>Prix Unitaire</th>
           <th>Actions</th>
@@ -263,7 +264,7 @@ if (isset($_GET['id'])) {
         <tr>
           <td><?= $i + 1 ?></td>
           <td><?= htmlspecialchars($cat['nom']) ?></td>
-          <td><?= htmlspecialchars($cat['description']) ?></td>
+          <!--  -->
           <td><?= htmlspecialchars($cat['mesure']) ?></td>
           <td><?= number_format($cat['prix_unitaire'], 0, ',', ' ') ?> FCFA</td>
 

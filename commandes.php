@@ -22,10 +22,13 @@ if (isset($_POST['ajouter_commande'])) {
     $quantite = $_POST['quantite'];
     $prix_unitaire = $_POST['prix_unitaire'];
     $remise = $_POST['remise'];
-    $utilisateur = $_SESSION['utilisateur'];
+    $username = $_SESSION['username'];
     $description = $_POST['description'];
 
     $total = ($prix_unitaire * $quantite) - $remise;
+
+     // Récupération de l'utilisateur connecté
+    $utilisateur = $_SESSION['username'] ?? 'inconnu';
 
     $stmt = $pdo->prepare("INSERT INTO commandes (client_id, categorie_id, quantite, prix_unitaire, remise, total, utilisateur, description) 
                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -172,6 +175,84 @@ gap: 10px;
     z-index: 999;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
+.price {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.price-1 {
+  margin: 0 15px;
+}
+.form-buttons {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.form-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.details-data{
+  padding: 10px 0;
+ 
+}
+
+.popup-content h3{
+  margin-bottom: 20px;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background-color: #2c7be5;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
+}
+
+.btn-submit:hover {
+    background-color: #1b60c9;
+}
+ .btn-add {
+      background-color: #2c7be5;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 5px;
+    }
+
+    .btn-add:hover {
+      background-color: #1a5ecd;
+    }
+
+    #add{
+      color: #2c7be5;
+     
+    }
+
+label{
+   color: #023544;
+}
+
     /* Récupère le style de ton popup */
 
   </style>
@@ -184,12 +265,12 @@ gap: 10px;
   <!-- Main -->
   <main class="main">
     
-    <a href="index.php" class="btn-retour">⬅ Retour à l'accueil</a>
+    <!-- <a href="index.php" class="btn-retour">⬅ Retour à l'accueil</a> -->
     <h1><?= $titre ?> </h1>
      <div class="actions">
-    <button onclick="document.getElementById('ajoutPopup').style.display='block'">+ Nouvelle commande</button>
+    <button  class="btn-add" onclick="document.getElementById('ajoutPopup').style.display='block'">+ Nouvelle commande</button>
 
- <div class="filters">
+  <div class="filters">
         <div>
     <label for="filterMonth">Filtrer par mois :</label>
     <select id="filterMonth">
@@ -209,13 +290,7 @@ gap: 10px;
     </select>
   </div>
   <div>
-    <!-- <label for="filterYear">Filtrer par année :</label>
-    <select id="filterYear">
-      <option value="">Toutes les années</option>
-      <option value="2024">2024</option>
-      <option value="2025">2025</option>
-    </select> -->
-
+   
     <select id="filterYear">
   <option value="">Toutes les années</option>
   <?php
@@ -228,6 +303,7 @@ gap: 10px;
   </div>
       
 </div>
+ <p class="total">Total commandes : <strong><?= count($commandes) ?></strong></p>
 <div class="">
  <?php if ($role === 'admin'): ?>
     <div class="export-wrapper">
@@ -244,23 +320,13 @@ gap: 10px;
       <!--  -->
     </div>
     
-      <p>Total commandes : <strong><?= count($commandes) ?></strong></p>
+     
 
-      <input type="text" id="searchInput" placeholder="🔍 Rechercher un client...">
+      <!-- <input type="text" id="searchInput" placeholder="🔍 Rechercher un client..."> -->
       
       
 
-       <?php if ($role === 'admin'): ?>
-    <div class="export-wrapper">
-      <select id="exportType">
-        <option value="pdf">📄 PDF</option>
-        <option value="excel">📊 Excel</option>
-      </select>
-      <button id="export" onclick="exportCategories()">Exporter</button>
-    </div>
-    <?php else: ?>
-    <span style="color: grey;">---</span>
-            <?php endif; ?>
+   
 
     </div>
 
@@ -270,28 +336,27 @@ gap: 10px;
 <table class="table-commandes">
     <thead>
         <tr>
+            <th>Date</th>
             <th>Client</th>
             <th>Catégorie</th>
             <th>Quantité</th>
             <th>PU</th>
             <th>Remise</th>
             <th>Total</th>
-            <th>Utilisateur</th>
-            <th>Date</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     <?php foreach ($commandes as $cmd): ?>
         <tr>
+            <td><?= date('d/m/Y', strtotime($cmd['date_commande'])) ?></td>    <!--afficcher la date sans lheure -->
             <td><?= htmlspecialchars($cmd['client_nom']) ?></td>
             <td><?= htmlspecialchars($cmd['categorie_nom']) ?></td>
             <td><?= $cmd['quantite'] ?></td>
             <td><?= $cmd['prix_unitaire'] ?></td>
             <td><?= $cmd['remise'] ?></td>
             <td><?= $cmd['total'] ?></td>
-            <td><?= htmlspecialchars($cmd['utilisateur']) ?></td>
-            <td><?= $cmd['date_commande'] ?></td>
+         
             <td class="action-btn">
                 <a href="#" class="action-show" onclick="ouvrirPopupVoir(<?= $cmd['id'] ?>)">Afficher</a>
                 <a href="#" class="action-edit" onclick="ouvrirPopupModifier(<?= $cmd['id'] ?>)">Modifier</a>
@@ -303,17 +368,20 @@ gap: 10px;
         <div class="popup-form" id="voirPopup<?= $cmd['id'] ?>">
             <div class="popup-content">
                 <h3>Détails de la commande</h3>
-                <p><strong>Client :</strong> <?= htmlspecialchars($cmd['client_nom']) ?></p>
-                <p><strong>Catégorie :</strong> <?= htmlspecialchars($cmd['categorie_nom']) ?></p>
-                <p><strong>Quantité :</strong> <?= $cmd['quantite'] ?></p>
-                <p><strong>Prix unitaire :</strong> <?= $cmd['prix_unitaire'] ?></p>
-                <p><strong>Remise :</strong> <?= $cmd['remise'] ?></p>
-                <p><strong>Total :</strong> <?= $cmd['total'] ?></p>
-                <p><strong>Description :</strong> <?= htmlspecialchars($cmd['description']) ?></p>
-                <p><strong>Utilisateur :</strong> <?= htmlspecialchars($cmd['utilisateur']) ?></p>
-                <p><strong>Date :</strong> <?= $cmd['date_commande'] ?></p>
+                <p class="details-data"><strong>Client :</strong> <?= htmlspecialchars($cmd['client_nom']) ?></p>
+                <p class="details-data"><strong>Catégorie :</strong> <?= htmlspecialchars($cmd['categorie_nom']) ?></p>
+                <p class="details-data"><strong>Quantité :</strong> <?= $cmd['quantite'] ?></p>
+                <p class="details-data"><strong>Prix unitaire :</strong> <?= $cmd['prix_unitaire'] ?></p>
+                <p class="details-data"><strong>Remise :</strong> <?= $cmd['remise'] ?></p>
+                <p class="details-data"><strong>Total :</strong> <?= $cmd['total'] ?></p>
+                <p class="details-data"><strong>Description :</strong> <?= htmlspecialchars($cmd['description']) ?></p>
+                <p class="details-data"><strong>Utilisateur :</strong> <?= htmlspecialchars($cmd['utilisateur']) ?></p>
+                <p class="details-data"><strong>Date :</strong> <?= $cmd['date_commande'] ?></p>
+
+                <div class="form-buttons">
                 <button onclick="window.print()">Imprimer</button>
-                <button onclick="fermerPopup('voirPopup<?= $cmd['id'] ?>')">Fermer</button>
+                <button class="btn-cancel" onclick="fermerPopup('voirPopup<?= $cmd['id'] ?>')">Fermer</button>
+                </div>
             </div>
         </div>
 
@@ -322,7 +390,10 @@ gap: 10px;
             <form method="POST" class="popup-content">
                 <h3>Modifier la commande</h3>
                 <input type="hidden" name="id" value="<?= $cmd['id'] ?>">
-                <label>Client</label>
+                
+                <div class="price">
+                  <div class="price-1">
+                    <label>Client</label>
                 <select name="client">
                     <?php foreach ($clients as $cl): ?>
                         <option value="<?= $cl['id'] ?>" <?= ($cl['id'] == $cmd['client_id']) ? 'selected' : '' ?>>
@@ -330,8 +401,10 @@ gap: 10px;
                         </option>
                     <?php endforeach; ?>
                 </select>
-
-                <label>Catégorie</label>
+                    </div>
+                    
+                <div class="price-1">
+                  <label>Catégorie</label>
                 <select name="categorie" onchange="updatePrixUnitaireEdit(this, 'pu<?= $cmd['id'] ?>')">
                     <?php foreach ($categories as $cat): ?>
                         <option value="<?= $cat['id'] ?>" data-prix="<?= $cat['prix_unitaire'] ?>" <?= ($cat['id'] == $cmd['categorie_id']) ? 'selected' : '' ?>>
@@ -339,21 +412,41 @@ gap: 10px;
                         </option>
                     <?php endforeach; ?>
                 </select>
+                </div>
 
-                <label>Quantité</label>
+              </div>
+
+                
+                
+                <label>Description</label>
+                <textarea id="desc" name="description"><?= htmlspecialchars($cmd['description']) ?></textarea>
+                
+                <div class="price">
+                  <div class="price-1">
+                    <label>Quantité</label>
                 <input type="number" name="quantite" value="<?= $cmd['quantite'] ?>" required>
-
-                <label>Prix unitaire</label>
+                  </div>
+                  <div class="price-1">
+                    <label>Prix unitaire</label>
                 <input type="number" name="prix_unitaire" id="pu<?= $cmd['id'] ?>" value="<?= $cmd['prix_unitaire'] ?>" readonly>
 
-                <label>Remise</label>
+                  </div>
+                </div> 
+                
+                <div class="price">
+                  <div class="price-1">
+                    <label>Remise</label>
                 <input type="number" name="remise" value="<?= $cmd['remise'] ?>">
-
-                <label>Description</label>
-                <textarea name="description"><?= htmlspecialchars($cmd['description']) ?></textarea>
-
-                <button type="submit" name="modifier_commande">Modifier</button>
-                <button type="button" onclick="fermerPopup('modifierPopup<?= $cmd['id'] ?>')">Annuler</button>
+                  </div>
+                  <div class="price-1">
+                    <label >Utilisateur</label>
+                    <input type="text" name="utilisateur" value="<?= $_SESSION['username'] ?>" readonly>
+                  </div>
+                </div>
+                 <div class="form-buttons">
+                <button class="btn-cancel" type="button" onclick="fermerPopup('modifierPopup<?= $cmd['id'] ?>')">Annuler</button>
+               <button class="btn-submit" type="submit" name="modifier_commande">Modifier</button>
+                </div>
             </form>
         </div>
     <?php endforeach; ?>
@@ -366,15 +459,24 @@ gap: 10px;
     <form method="POST" class="popup-content">
         <h3>Nouvelle commande</h3>
 
-        <label>Client</label>
+        <div class="price">
+          <div class="price-1"></div>
+          <div class="price-1"></div>
+        </div>
+
+         <div class="price">
+          <div class="price-1">
+          <label>Client</label>
         <select name="client" required>
             <option value="">--Sélectionner--</option>
             <?php foreach ($clients as $cl): ?>
                 <option value="<?= $cl['id'] ?>"><?= htmlspecialchars($cl['nom']) ?></option>
             <?php endforeach; ?>
         </select>
+          </div>
 
-        <label>Catégorie</label>
+          <div class="price-1">
+          <label>Catégorie</label>
         <select name="categorie" onchange="updatePrixUnitaire(this)" required>
             <option value="">--Sélectionner--</option>
             <?php foreach ($categories as $cat): ?>
@@ -383,24 +485,42 @@ gap: 10px;
                 </option>
             <?php endforeach; ?>
         </select>
+          </div>
+        </div>
+        <label>Description</label>
+        <textarea id="desc" name="description">...</textarea>
 
-        <label>Quantité</label>
+        <div class="price">
+          <div class="price-1">
+            <label>Quantité</label>
         <input type="number" name="quantite" required>
-
+          </div>
+          <div class="price-1">
         <label>Prix unitaire</label>
         <input type="number" name="prix_unitaire" id="pu" readonly required>
+          </div>
+        </div>
 
-        <label>Remise</label>
+       
+          <div class="price">
+          <div class="price-1">
+             <label>Remise</label>
         <input type="number" name="remise" value="0">
+          </div>
+          <div class="price-1">
+            <label>Utilisateur</label>
+        <input type="text" value="<?= $_SESSION['username'] ?>" readonly>
+        
 
-        <label>Description</label>
-        <textarea name="description">...</textarea>
+          </div>
+        </div>
 
-        <label>Utilisateur</label>
-        <input type="text" value="<?= $_SESSION['utilisateur'] ?>" readonly>
-
-        <button type="submit" name="ajouter_commande">Ajouter</button>
-        <button type="button" onclick="document.getElementById('ajoutPopup').style.display='none'">Annuler</button>
+        <div class="form-buttons">
+             
+        <button type="button" class="btn-cancel" onclick="document.getElementById('ajoutPopup').style.display='none'">Annuler</button>
+         <button type="submit" class="btn-submit" name="ajouter_commande">Ajouter</button>        
+      </div>
+        
     </form>
 </div>
 
