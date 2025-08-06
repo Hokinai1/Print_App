@@ -70,8 +70,9 @@ if (isset($_GET['id'])) {
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./css/style.css">
+   <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
  
-  <title>Catégories</title>
+ 
 </head>
 <body>
 
@@ -211,13 +212,26 @@ if (isset($_GET['id'])) {
 
 
 </style>
-<?php include("./includes/header.php"); ?>
 
-<div class="dashboard">
-<?php include('./includes/sidebar.php'); ?>
+<?php
+$currentPage = 'categories';
+// on definit le titre a afficher dans l'onglet
+$titre = "Liste des catégories";
+// insertion du header
+@include("./includes/header.php");
+?>
+
+  <div class="dashboard">
+<!-- Top Bar -->
+
+<?php
+
+// insertion du sidebar
+@include('./includes/sidebar.php');
+?>
 
 <main class="main">
-  <h1>Liste des Catégories</h1>
+  <h1><?= $titre ?> </h1>
 
   <div class="actions">
     <!-- <button id="addCategoryBtn" class="btn-add">+ Nouvelle catégorie</button> -->

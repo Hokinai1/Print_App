@@ -3,15 +3,6 @@ session_start();
 require_once './includes/db.php';
 
 
-// Sécurité : redirige si l'utilisateur n'est pas connecté
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php'); // ou login.php selon ton fichier
-    exit();
-}
-
-// Récupération rôle utilisateur
-$role= $_SESSION['user_role'] ?? 'user';
-
 
 
 $infos = []; // Valeur par défaut
@@ -74,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/config.css">
-   
+    <title>Paramètres de l'application</title>
 </head>
 
 <style>
@@ -180,26 +171,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         margin-bottom: 20px;
         border-top: 5px solid #bebfc0ff;
     }
-    .main h1{
-        margin: 20px 0;
-        color: #f78c1f;
-    }
 </style>
 
 <body>
-<?php
-$currentPage = 'parametres';
-// on definit le titre a afficher dans l'onglet
-$titre = "Application option";
-// insertion du header
-@include("./includes/header.php");
-?>
+
     <div class="dashboard">
         <?php @include('./includes/sidebar.php'); ?>
 
         <main class="main">
-            <h1><?= $titre ?> </h1>
-
+            <h1>Paramètres de l'application</h1>
             <?php if (isset($_SESSION['success_message'])): ?>
                 <div class="alert alert-success">
                     <?= $_SESSION['success_message'] ?>

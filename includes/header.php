@@ -21,23 +21,26 @@ $role = $_SESSION['user_role'] ?? 'user';
  <title> <?= $titre ?? "Accueil" ?> </title> 
  
  <style>
-  #user{
-    color: red;
+  .user{
+    color: #f78c1f;
+  }
+  .date{
+    color : hsl(202, 55%, 16%);
   }
  </style>
 
  <!-- Top Bar -->
   <div class="topbar">
     <div class="topbar-left">
-      <span id="current-date"></span>
+      <span class="date" id="current-date"></span>
     </div>
     <div class="topbar-right">
        <div class="user-info">
         <img src="./assets/images/profil.jpg" alt="Profil" class="profile-pic">
         <!-- <span class="username">Jean Dupont</span> -->
-         <p>Rôle : <strong><?= htmlspecialchars($role) ?></strong> |</p>
+         <p>Rôle : <strong class="user"><?= htmlspecialchars($role) ?></strong> |</p>
         <div class="dropdown">
-          <button class="dropdown-toggle"> Connecté en tant que : <span id="user"> <?= htmlspecialchars($username) ?></span> </button>
+          <button class="dropdown-toggle"> Connecté en tant que : <span class="user"> <?= htmlspecialchars($username) ?></span> </button>
           <div class="dropdown-menu">
             <a href="#"onclick="confirmerDeconnexion()">Déconnexion</a>
           </div>
