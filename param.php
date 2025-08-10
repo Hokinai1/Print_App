@@ -3,8 +3,6 @@ session_start();
 require_once './includes/db.php';
 
 
-
-
 $infos = []; // Valeur par défaut
 // Récupération des infos de l'entreprise
 $stmt = $pdo->query("SELECT * FROM infos LIMIT 1");
@@ -148,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .user-1 {
-        background-color: #ffffffff;
+        background-color: #fff;
         padding: 0 10px;
         border-radius: 15px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -164,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .user-2 {
-        background-color: #ffffffff;
+        background-color: #fff;
         padding: 0 10px;
         border-radius: 15px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);

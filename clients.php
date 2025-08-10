@@ -290,8 +290,9 @@ gap: 10px;
             <!-- -->
             <td class="action-btn">
               <a href="?afficher=<?= $client['id'] ?>" class="action-show">Afficher</a>
-              <a href="?modifier=<?= $client['id'] ?>" class="action-edit">Modifier</a>
+              
           <?php if ($role === 'admin'): ?>
+            <a href="?modifier=<?= $client['id'] ?>" class="action-edit">Modifier</a>
         
         <a href="?supprimer=<?= $client['id'] ?>" class="action-delete" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
             
