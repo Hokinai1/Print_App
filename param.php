@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['telephone'],
             $infos['id']
         ]);
-     $_SESSION['success_message']  = "✅ Informations de l'entreprise enregistrées avec succès.";
+        $_SESSION['success_message']  = "✅ Informations de l'entreprise enregistrées avec succès.";
 
         $infos = $pdo->query("SELECT * FROM infos LIMIT 1")->fetch(PDO::FETCH_ASSOC); // Rafraîchir les données
         header("Location: param.php"); // Redirection vers la même page
@@ -63,20 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/config.css">
-    <title>Paramètres de l'application</title>
+
 </head>
 
 <style>
-    /* .form-group {
-        margin-bottom: 10px;
-    } */
-
-    /* label {
-        display: block;
-        font-weight: normal;
-        margin-bottom: 2px;
-    } */
-
     .section {
         background: #fff;
         border-radius: 8px;
@@ -85,30 +75,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .form-group {
+    .part{
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: row;
+       justify-content: space-between;
         gap: 20px;
-        margin-bottom: 10px;
-        align-items: center;
     }
 
-    .form-group label {
-        /* flex: 1 0 200px; */
-        font-weight: normal;
+
+
+    .form-group{
+        margin: 10px 0;
     }
 
-    /* .form-group input {
-    flex: 2 0 300px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-} */
+  
+    input{
+        border: none;
+        background-color: #F3F4F6; 
+        margin: 5px 0;
+        outline: 2px solid #c4dcf8ff;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    input:hover{
+         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
+    border-color: #93C5FD; 
+    }
+
 
     input[type="text"],
     input[type="email"] {
         width: 100%;
-        padding: 5px;
+        
+        /* border-radius: 5px;
+        border-color: #bad1eeff;
+        padding: 5px; */
     }
 
     .alert-success {
@@ -142,10 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     .user-form {
         display: flex;
-        gap: 40px;
+        justify-content: space-between;
+        gap: 50px;
+        
     }
 
     .user-1 {
+        width: 50%;
         background-color: #fff;
         padding: 0 10px;
         border-radius: 15px;
@@ -162,6 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     .user-2 {
+        width: 50%;
         background-color: #fff;
         padding: 0 10px;
         border-radius: 15px;
@@ -195,13 +201,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2>Informations de l'entreprise</h2>
                 <form method="POST">
                     <input type="hidden" name="save_entreprise" value="1">
-
-                    <div class="form-group"><label>Nom</label><input type="text" name="nom_entreprise" value="<?= htmlspecialchars($infos['nom_entreprise'] ?? '') ?>"></div>
+                    <div class="part">
+                        <div class="part-1">
+                    <div class="form-group" ><label>Nom</label><input type="text" name="nom_entreprise" value="<?= htmlspecialchars($infos['nom_entreprise'] ?? '') ?>"></div>
                     <div class="form-group"><label>Domaine</label><input type="text" name="domaine" value="<?= htmlspecialchars($infos['domaine'] ?? '') ?>"></div>
+                    </div>
+                    
+                    <div class="part-1">
                     <div class="form-group"><label>Adresse</label><input type="text" name="adresse" value="<?= htmlspecialchars($infos['adresse'] ?? '') ?>"></div>
                     <div class="form-group"><label>Numéro</label><input type="text" name="numero" value="<?= htmlspecialchars($infos['numero'] ?? '') ?>"></div>
+                    </div>
+                    
+                    <div class="part-1">
                     <div class="form-group"><label>Responsable</label><input type="text" name="responsable" value="<?= htmlspecialchars($infos['responsable'] ?? '') ?>"></div>
                     <div class="form-group"><label>Email</label><input type="email" name="email" value="<?= htmlspecialchars($infos['email'] ?? '') ?>"></div>
+                    
+                    </div>
+                    </div>
                     <div class="form-group"><label>Téléphone</label><input type="text" name="telephone" value="<?= htmlspecialchars($infos['telephone'] ?? '') ?>"></div>
 
                     <div class="btn">
