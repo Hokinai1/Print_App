@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/config.css">
+    <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
 
 </head>
 
@@ -108,9 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     input[type="email"] {
         width: 100%;
         
-        /* border-radius: 5px;
-        border-color: #bad1eeff;
-        padding: 5px; */
+
     }
 
     .alert-success {
@@ -175,15 +174,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         margin-bottom: 20px;
         border-top: 5px solid #bebfc0ff;
     }
+    .main h1{
+        margin: 20px 0;
+        color: #f78c1f;
+    }
 </style>
 
 <body>
 
-    <div class="dashboard">
-        <?php @include('./includes/sidebar.php'); ?>
+<?php
+$currentPage = 'parametres';
+// on definit le titre a afficher dans l'onglet
+$titre = "Application option...";
+// insertion du header
+@include("./includes/header.php");
+?>
+
+  <div class="dashboard">
+<!-- Top Bar -->
+
+<?php
+
+// insertion du sidebar
+@include('./includes/sidebar.php');
+?>
+
+   
 
         <main class="main">
-            <h1>Paramètres de l'application</h1>
+            <h1><?= $titre ?> </h1>
+
             <?php if (isset($_SESSION['success_message'])): ?>
                 <div class="alert alert-success">
                     <?= $_SESSION['success_message'] ?>

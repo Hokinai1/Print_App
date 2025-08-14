@@ -119,7 +119,7 @@ $infos = $pdo->query("SELECT * FROM infos LIMIT 1")->fetch(PDO::FETCH_ASSOC);
  <?php if ($role === 'admin'): ?>
   
     <li class="<?= ($currentPage === 'parametres') ? 'active' : '' ?>">
-      <a href="config.php" >
+      <a href="param.php" >
         <img src="./assets/icons/settings.svg" class="icon" alt="Paramètres"> Paramètres
       </a>
     </li>
