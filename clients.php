@@ -10,6 +10,37 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 
+
+// --- Export CSV ---
+if (isset($_GET['export']) && $_GET['export'] === 'csv') {
+    $stmt = $pdo->query("SELECT * FROM clients ORDER BY id DESC");
+    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="clients.csv"');
+
+    $output = fopen('php://output', 'w');
+    fputcsv($output, ['ID', 'Type', 'Nom', 'Adresse', 'Email', 'Contact', 'Date création']); // entêtes
+
+    foreach ($clients as $client) {
+        fputcsv($output, [
+            $client['id'],
+            $client['type'],
+            $client['nom'],
+            $client['adresse'],
+            $client['email'],
+            $client['contact'],
+            $client['date_creation']
+        ]);
+    }
+
+    fclose($output);
+    exit;
+}
+
+
+// Finnnnnnnnnnn exporter
+
 $message = "";
 $type = "";
 
@@ -149,14 +180,22 @@ $currentPage = 'clients';
 
       #export{
         
-        background-color: #76bcc9ff;
+        background-color: #a6dce5ff;
         color: #2c7be5;
         padding: 8px 14px;
      border: none;
      border-radius: 4px;
      cursor: pointer;
+        
 
       }
+
+      #export:hover{
+          background-color: #90c7d1ff;
+          
+
+        }
+        
       .main h1 {
      
         margin: 20px 0;
@@ -217,6 +256,10 @@ gap: 10px;
       border-radius: 5px;
     }
 
+    button a {
+      text-decoration: none;
+    }
+
     
  
 
@@ -250,12 +293,12 @@ gap: 10px;
 
        <?php if ($role === 'admin'): ?>
     <div class="export-wrapper">
-      <select id="exportType">
+      <!-- <select id="exportType">
         <option value="pdf">📄 PDF</option>
         <option value="excel">📊 Excel</option>
-      </select>
+      </select> -->
     
-      <button id="export" onclick="exportCategories()">Exporter</button>
+      <button id="export" > <a href="clients.php?export=csv"> 📊 Exporter CSV</a></button>
     </div>
     <?php else: ?>
     <span style="color: grey;">---</span>
