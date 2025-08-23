@@ -87,22 +87,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     .form-group{
         margin: 10px 0;
+        padding: 5px 0;
     }
 
   
     input{
         border: none;
+        /* box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); hover:shadow-lg */
         background-color: #F3F4F6; 
         margin: 5px 0;
-        outline: 2px solid #c4dcf8ff;
-        padding: 5px;
+        font-size: 16px;
+        color: #3b3a3aff;
+        outline: 2px solid #ddd;
+        padding: 10px 5px;
         border-radius: 5px;
     }
 
-    input:hover{
-         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
-    border-color: #93C5FD; 
-    }
+    /* input:hover{
+         
+    border-color: #bec1c4ff; 
+    } */
 
 
     input[type="text"],
@@ -151,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .user-1 {
         width: 50%;
         background-color: #fff;
-        padding: 0 10px;
+        padding: 0 15px;
         border-radius: 15px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
@@ -161,14 +165,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .user-1 h3,
     .user-2 h3 {
         padding: 10px 0;
-        color: #bebfc0ff;
+        color: #1b60c9;
         text-align: center;
     }
 
     .user-2 {
         width: 50%;
         background-color: #fff;
-        padding: 0 10px;
+        padding: 0 15px;
         border-radius: 15px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
@@ -229,7 +233,7 @@ $titre = "Application option...";
                     
                     <div class="part-1">
                     <div class="form-group"><label>Adresse</label><input type="text" name="adresse" value="<?= htmlspecialchars($infos['adresse'] ?? '') ?>"></div>
-                    <div class="form-group"><label>Numéro</label><input type="text" name="numero" value="<?= htmlspecialchars($infos['numero'] ?? '') ?>"></div>
+                    <div class="form-group"><label>Numéro (NIF) </label><input type="text" name="numero" value="<?= htmlspecialchars($infos['numero'] ?? '') ?>"></div>
                     </div>
                     
                     <div class="part-1">
@@ -238,8 +242,10 @@ $titre = "Application option...";
                     
                     </div>
                     </div>
+                    
+              
                     <div class="form-group"><label>Téléphone</label><input type="text" name="telephone" value="<?= htmlspecialchars($infos['telephone'] ?? '') ?>"></div>
-
+                   
                     <div class="btn">
                         <button type="submit" class="btn-submit">✅ Enregistrer les modification</button>
                     </div>
@@ -255,7 +261,7 @@ $titre = "Application option...";
                     <div class="user-form">
                         <!-- Colonne Utilisateurs -->
                         <div class="user-1">
-                            <h3> Infos de l'utilisateurs</h3>
+                            <h3> Informations de l'utilisateur...</h3>
                             <?php foreach ($users as $index => $user): ?>
                                 <?php if ($user['role'] !== 'admin'): ?>
                                     <input type="hidden" name="user_id[]" value="<?= $user['id'] ?>">
@@ -269,7 +275,7 @@ $titre = "Application option...";
 
                         <!-- Colonne Administrateurs -->
                         <div class="user-2">
-                            <h3>Infos de l'administrateur</h3>
+                            <h3>Informations de l'administrateur...</h3>
                             <?php foreach ($users as $index => $user): ?>
                                 <?php if ($user['role'] === 'admin'): ?>
                                     <input type="hidden" name="user_id[]" value="<?= $user['id'] ?>">
