@@ -19,6 +19,10 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+#eye {
+  width: 30px;
+}
+
 /* IMAGE PANEL */
 /* .image-panel {
   display: flex;

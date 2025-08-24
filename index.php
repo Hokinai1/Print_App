@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>App_Login</title>
   <link rel="stylesheet" href="./css/root.css">
   <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
   <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
 </head>
 <body>
@@ -61,7 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password">Mot de passe</label>
         <div class="password-wrapper">
           <input type="password" id="password" name="password" required>
-          <i class="fa-solid fa-eye" id="togglePassword"></i>
+          <img src="./assets/images/eye.png" id="eye" id="togglePassword" alt="">
+
+          <i class="fa-solid fa-eye" id="togglePassword"> </i>
         </div>
 
         <button type="submit"> Se connecter </button>
