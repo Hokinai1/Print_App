@@ -1,0 +1,145 @@
+/* Corps avec image et dégradé vertical */
+@font-face {
+    font-family: 'PlusJakartaSans-Medium';
+    src: url(../assets/fonts/static/PlusJakartaSans-Medium.ttf);
+}
+
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
+        url('../assets/images/bg_print.jpg') no-repeat center center;
+    background-size: cover;
+    font-family: 'PlusJakartaSans-Medium';
+    margin: 0;
+}
+
+/* Container du formulaire avec effet de flou */
+.login-container {
+    width: 500px;
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    border-top: 5px solid #f78c1f;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Fond semi-transparent avec flou */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* pour Safari */
+}
+
+/* Formulaire */
+.form-panel {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Titres et labels */
+.login-form h2 {
+    font-size: 22px;
+    text-align: start;
+    margin-bottom: 25px;
+    color: #023544;
+    font-family: 'PlusJakartaSans-Medium';
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 16px;
+    /* color: hsl(203, 41%, 72%); */
+    color: #023544;
+    font-family: 'PlusJakartaSans-Medium';
+}
+
+/* Inputs */
+.login-form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    font-family: 'PlusJakartaSans-Medium';
+    font-size: 15px;
+    border: 1px solid hsl(203, 41%, 72%);
+    border-radius: 6px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.7);
+    color: #023544;
+}
+
+/* Password wrapper */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+
+/* Bouton */
+.login-form button {
+    width: 100%;
+    padding: 16px;
+    background-color: #f78c1f;
+    font-family: 'PlusJakartaSans-Medium';
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #cf7112;
+}
+
+/* Message d'erreur */
+.message {
+    margin-top: 15px;
+    color: red;
+    font-family: 'PlusJakartaSans-Medium';
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Petite animation pour le formulaire */
+.login-container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
