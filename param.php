@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/config.css">
-    <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
 
 </head>
 

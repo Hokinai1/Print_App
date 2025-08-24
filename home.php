@@ -65,7 +65,7 @@ $topClients = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="./css/style.css" />
-  <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
  
   
 </head>

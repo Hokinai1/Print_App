@@ -189,7 +189,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/commande.css">
-    <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
     <title>Liste des Commandes</title>
 
     <?php

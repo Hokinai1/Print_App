@@ -191,7 +191,7 @@ if (isset($_GET['afficher'])) {
 
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/clients.css.">
-  <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
+<link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
 
   <?php
   // on definit le titre a afficher dans l'onglet

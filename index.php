@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>App_Login</title>
   <link rel="stylesheet" href="./css/root.css">
   <link rel="stylesheet" href="./css/login.css">
-  <link rel="shortcut icon" href="./assets/icons/icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
 </head>
 <body>
 
